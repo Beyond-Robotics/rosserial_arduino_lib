@@ -4,16 +4,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "ros/msg.h"
-#include "ArduinoIncludes.h"
 
 namespace rosserial_arduino
 {
 
-#ifdef ESP8266
-    static const char TEST[] = "rosserial_arduino/Test";
-#else
-    static const char TEST[] PROGMEM = "rosserial_arduino/Test";
-#endif
+static const char TEST[] = "rosserial_arduino/Test";
 
   class TestRequest : public ros::Msg
   {
@@ -26,7 +21,7 @@ namespace rosserial_arduino
     {
     }
 
-    virtual int serialize(unsigned char *outbuffer) const
+    virtual int serialize(unsigned char *outbuffer) const override
     {
       int offset = 0;
       uint32_t length_input = strlen(this->input);
@@ -37,7 +32,7 @@ namespace rosserial_arduino
       return offset;
     }
 
-    virtual int deserialize(unsigned char *inbuffer)
+    virtual int deserialize(unsigned char *inbuffer) override
     {
       int offset = 0;
       uint32_t length_input;
@@ -52,12 +47,8 @@ namespace rosserial_arduino
      return offset;
     }
 
-    const char * getType(){ return TEST; };
-    #ifdef ESP8266
-        const char * getMD5() { return  ("39e92f1778057359c64c7b8a7d7b19de");};
-    #else
-        const char * getMD5() { return  PSTR("39e92f1778057359c64c7b8a7d7b19de");};
-    #endif
+    virtual const char * getType() override { return TEST; };
+    virtual const char * getMD5() override { return "39e92f1778057359c64c7b8a7d7b19de"; };
 
   };
 
@@ -72,7 +63,7 @@ namespace rosserial_arduino
     {
     }
 
-    virtual int serialize(unsigned char *outbuffer) const
+    virtual int serialize(unsigned char *outbuffer) const override
     {
       int offset = 0;
       uint32_t length_output = strlen(this->output);
@@ -83,7 +74,7 @@ namespace rosserial_arduino
       return offset;
     }
 
-    virtual int deserialize(unsigned char *inbuffer)
+    virtual int deserialize(unsigned char *inbuffer) override
     {
       int offset = 0;
       uint32_t length_output;
@@ -98,12 +89,8 @@ namespace rosserial_arduino
      return offset;
     }
 
-    const char * getType(){ return TEST; };
-    #ifdef ESP8266
-        const char * getMD5() { return  ("0825d95fdfa2c8f4bbb4e9c74bccd3fd");};
-    #else
-        const char * getMD5() { return  PSTR("0825d95fdfa2c8f4bbb4e9c74bccd3fd");};
-    #endif
+    virtual const char * getType() override { return TEST; };
+    virtual const char * getMD5() override { return "0825d95fdfa2c8f4bbb4e9c74bccd3fd"; };
 
   };
 
