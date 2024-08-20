@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "ros/msg.h"
+#include "ArduinoIncludes.h"
 
 namespace rosserial_arduino
 {
@@ -35,7 +36,7 @@ namespace rosserial_arduino
     {
     }
 
-    virtual int serialize(unsigned char *outbuffer) const override
+    virtual int serialize(unsigned char *outbuffer) const
     {
       int offset = 0;
       *(outbuffer + offset + 0) = (this->adc0 >> (8 * 0)) & 0xFF;
@@ -59,7 +60,7 @@ namespace rosserial_arduino
       return offset;
     }
 
-    virtual int deserialize(unsigned char *inbuffer) override
+    virtual int deserialize(unsigned char *inbuffer)
     {
       int offset = 0;
       this->adc0 =  ((uint16_t) (*(inbuffer + offset)));
@@ -83,8 +84,8 @@ namespace rosserial_arduino
      return offset;
     }
 
-    virtual const char * getType() override { return "rosserial_arduino/Adc"; };
-    virtual const char * getMD5() override { return "6d7853a614e2e821319068311f2af25b"; };
+    const char * getType(){ return PSTR( "rosserial_arduino/Adc" ); };
+    const char * getMD5(){ return PSTR( "6d7853a614e2e821319068311f2af25b" ); };
 
   };
 
